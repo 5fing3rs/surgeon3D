@@ -1,0 +1,4 @@
+sceneSetups:
+- path: Assets/Example/Scenes/Hand Control Example.unity
+  isLoaded: 1
+  isActive: 1

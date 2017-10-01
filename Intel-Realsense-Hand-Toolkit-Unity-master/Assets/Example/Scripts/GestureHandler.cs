@@ -21,11 +21,11 @@ namespace Example
         {
             if (GameObject.Find("DepthCameraManager").GetComponent<GesturalManager>().GetHandSide(gesture) == BodySideType.BODY_SIDE_LEFT)
             {
-                leftCursor.GetComponent<TextMesh>().text = "L : " + gesture.name;
+                leftCursor.GetComponent<TextMesh>().text = "Left";
             }
             else if (GameObject.Find("DepthCameraManager").GetComponent<GesturalManager>().GetHandSide(gesture) == BodySideType.BODY_SIDE_RIGHT)
             {
-                rightCursor.GetComponent<TextMesh>().text = "R : " + gesture.name;
+                rightCursor.GetComponent<TextMesh>().text = "Right";
             }
         }
     }

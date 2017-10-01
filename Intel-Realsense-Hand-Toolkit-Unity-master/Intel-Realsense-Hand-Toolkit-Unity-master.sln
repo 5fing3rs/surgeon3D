@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2017
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Intel-Realsense-Hand-Toolkit-Unity-master", "Intel-Realsense-Hand-Toolkit-Unity-master.csproj", "{F125C62F-4880-7C23-C525-0D914B74AAA6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Intel-Realsense-Hand-Toolkit-Unity-master.Editor", "Intel-Realsense-Hand-Toolkit-Unity-master.Editor.csproj", "{1C86E2CD-417A-665D-11C3-AFD46E3E3892}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F125C62F-4880-7C23-C525-0D914B74AAA6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F125C62F-4880-7C23-C525-0D914B74AAA6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F125C62F-4880-7C23-C525-0D914B74AAA6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F125C62F-4880-7C23-C525-0D914B74AAA6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1C86E2CD-417A-665D-11C3-AFD46E3E3892}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1C86E2CD-417A-665D-11C3-AFD46E3E3892}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1C86E2CD-417A-665D-11C3-AFD46E3E3892}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1C86E2CD-417A-665D-11C3-AFD46E3E3892}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
