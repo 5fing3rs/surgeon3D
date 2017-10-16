@@ -5,6 +5,7 @@ Confidential and Proprietary - Protected under copyright and other laws.
 ==============================================================================*/
 
 using UnityEngine;
+using System;
 
 namespace Vuforia
 {
@@ -17,7 +18,9 @@ namespace Vuforia
         #region PRIVATE_MEMBER_VARIABLES
  
         private TrackableBehaviour mTrackableBehaviour;
-    
+        private DateTime startDate=DateTime.Now;
+        private Vector3 oldPosn;
+        private bool firstTime = false;
         #endregion // PRIVATE_MEMBER_VARIABLES
 
 
@@ -82,10 +85,36 @@ namespace Vuforia
             {
                 component.enabled = true;
             }
-
+            // Update();
             Debug.Log("Trackable " + mTrackableBehaviour.TrackableName + " found");
         }
 
+        // Update is called once per frame
+        void Update () {
+            // Get the position of one of the corners of the image target
+            // For instance, let's get the top-right corner (+X, +Z)
+            Vector3 cornerInLocalRef = new Vector3(0.5f, 0, 0.5f);
+             
+            // Convert from local ref to world ref
+            Vector3 cornerInWorldRef = this.transform.TransformPoint(cornerInLocalRef);
+             
+            // Convert from world ref to camera ref
+            Vector3 cornerInCameraRef = Camera.main.transform.InverseTransformPoint(cornerInWorldRef);
+             
+            // Debug.Log ("Top-right target corner in world ref: " + cornerInWorldRef);
+            Debug.Log ("Top-right target corner in camera ref: " + cornerInCameraRef);
+            if(!firstTime){
+                    float translation = Time.deltaTime;
+                    float disp = (cornerInCameraRef-oldPosn).magnitude;
+                    float velocity = (float)disp/(float)translation;
+                    Debug.Log("Velocity is: " +  Convert.ToString(velocity));   
+            }
+            else{
+                firstTime = false;
+                Debug.Log("Velocity is: 0");
+            }
+            oldPosn = cornerInCameraRef;
+        }
 
         private void OnTrackingLost()
         {
@@ -103,8 +132,10 @@ namespace Vuforia
             {
                 component.enabled = false;
             }
-
+            // Update();
+            firstTime = true;
             Debug.Log("Trackable " + mTrackableBehaviour.TrackableName + " lost");
+            Debug.Log("Velocity is 0");
         }
 
         #endregion // PRIVATE_METHODS
