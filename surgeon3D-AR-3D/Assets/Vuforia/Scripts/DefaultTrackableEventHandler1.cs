@@ -5,42 +5,38 @@ Confidential and Proprietary - Protected under copyright and other laws.
 ==============================================================================*/
 
 using UnityEngine;
-
-
 namespace Vuforia
 {
     /// <summary>
     /// A custom handler that implements the ITrackableEventHandler interface.
     /// </summary>
-    
-    public class DefaultTrackableEventHandler : MonoBehaviour,
+    public class DefaultTrackableEventHandler1 : MonoBehaviour,
                                                 ITrackableEventHandler
     {
         #region PRIVATE_MEMBER_VARIABLES
 
         public TrackableBehaviour mTrackableBehaviour;
         public int flag;
-        public int flag_calculat;
-        public int flag_remote;
+        public int flag_calculator;
+      //  public int flag_remote;
         private Vector3 velocity = new Vector3(0, 0, 0);
         private Vector3 previous = new Vector3(0, 0, 0);
         private float time;
         private float v;
         private float angle;
-        private Vector3 orientation_remote = new Vector3(0, 0, 0);
-        private Vector3 orientation_remote2 = new Vector3(0, 0, 0);
-        private Vector3 orientation_remote3 = new Vector3(0, 0, 0);
         private Vector3 screenPoint = new Vector3(0, 0, 0);
-        public DefaultTrackableEventHandler1 calculator;
+      //  private Vector3 orientation_remote = new Vector3(0, 0, 0);
+        public Vector3 orientation_calculator = new Vector3(0, 0, 0);
+        public Vector3 orientation_calculator2 = new Vector3(0, 0, 0);
+        public Vector3 orientation_calculator3 = new Vector3(0, 0, 0);
         #endregion // PRIVATE_MEMBER_VARIABLES
+
+
 
         #region UNTIY_MONOBEHAVIOUR_METHODS
 
         void Start()
         {
-            GameObject calc = GameObject.Find("Calculator");
-            calculator = calc.GetComponent<DefaultTrackableEventHandler1>();
-            flag_calculat = calculator.flag_calculator;
             mTrackableBehaviour = GetComponent<TrackableBehaviour>();
             if (mTrackableBehaviour)
             {
@@ -99,10 +95,10 @@ namespace Vuforia
             {
                 component.enabled = true;
             }
-          //  if (mTrackableBehaviour.TrackableName == "Calculator")
-            //    flag_calculator = 1;
-            if (mTrackableBehaviour.TrackableName == "Remotev2")
-                flag_remote = 1;
+            if (mTrackableBehaviour.TrackableName == "Calculator")
+                flag_calculator = 1;
+           // else if (mTrackableBehaviour.TrackableName == "remote")
+             //   flag_remote = 1;
             Debug.Log("Trackable " + mTrackableBehaviour.TrackableName + " found");
         }
 
@@ -123,23 +119,20 @@ namespace Vuforia
             {
                 component.enabled = false;
             }
-            //if (mTrackableBehaviour.TrackableName == "Calculator")
-              //  flag_calculator = 0;
-            if (mTrackableBehaviour.TrackableName == "Remotev2")
-                flag_remote = 0;
+            if (mTrackableBehaviour.TrackableName == "Calculator")
+                flag_calculator = 0;
+           // else if (mTrackableBehaviour.TrackableName == "remote")
+             //   flag_remote = 0;
             Debug.Log("Trackable " + mTrackableBehaviour.TrackableName + " lost");
             //mTrackableBehaviour.transform()
         }
 
         void OnGUI()
         {
-            //if (mTrackableBehaviour.TrackableName == "Calculator")
-            //  GUI.Label(new Rect(Screen.width - 200, 0, 200, Screen.height - 40), "Velociy of " + mTrackableBehaviour.TrackableName + " is " + v);
-            if (mTrackableBehaviour.TrackableName == "Remotev2")
+            if (mTrackableBehaviour.TrackableName == "Calculator")
             {
-                GUI.Label(new Rect(Screen.width - 500, 100, 300, Screen.height - 80), "Position of " + mTrackableBehaviour.TrackableName + " is " + screenPoint);
-                GUI.Label(new Rect(Screen.width - 500, 120, 300, Screen.height - 90), "Velociy of " + mTrackableBehaviour.TrackableName + " is " + v);
-                GUI.Label(new Rect(Screen.width - 500, 140, 300, Screen.height - 100), "Angle between calculator and remote is  " + angle);
+                GUI.Label(new Rect(Screen.width - 500, 60, 300, Screen.height - 80), "Position of " + mTrackableBehaviour.TrackableName + " is " + screenPoint);
+                GUI.Label(new Rect(Screen.width - 500, 80, 300, Screen.height - 90), "Velociy of " + mTrackableBehaviour.TrackableName + " is " + v);
             }
         }
 
@@ -184,29 +177,12 @@ namespace Vuforia
                     Debug.Log("Distance traversed by  " + mTrackableBehaviour.TrackableName+ " is  "  + (screenPoint - previous));
                     Debug.Log("Velocity of  " + mTrackableBehaviour.TrackableName + " is " + v);
                     previous = screenPoint;
-                    if(mTrackableBehaviour.TrackableName == "Remotev2")
+                 
+                    if(mTrackableBehaviour.TrackableName == "Calculator")
                     {
-                        orientation_remote = screenPoint;
-                        orientation_remote2 = screenPoint2;
-                        orientation_remote3 = screenPoint3;
-                    }
-                    Debug.Log("Flag of calculator is " + flag_calculat);
-                    if(calculator.flag_calculator==1 && flag_remote==1)
-                    {
-                        //float val1 = orientation_remote.magnitude;
-                        //float val2 = calculator.orientation_calculator.magnitude;
-                        //float numerator = orientation_remote.x * calculator.orientation_calculator.x + orientation_remote.y * calculator.orientation_calculator.y + orientation_remote.z * calculator.orientation_calculator.z;
-                        //float value = numerator / (val1 * val2);
-                        //angle = Mathf.Acos(value);
-                        //angle =  (float) (angle * 180) /  (float) Mathf.PI;
-                        //Debug.Log("Angle is " + angle);
-                        var dir = Vector3.Cross(orientation_remote2 - orientation_remote, orientation_remote3 - orientation_remote);
-                        var norm1 = Vector3.Normalize(dir);
-                        var dir2 = Vector3.Cross(calculator.orientation_calculator2 - calculator.orientation_calculator, calculator.orientation_calculator3 - calculator.orientation_calculator);
-                        var norm2 = Vector3.Normalize(dir2);
-                        angle = Mathf.Acos(Vector3.Dot(norm1, norm2));
-                        angle = (float)(angle * 180) / (float)Mathf.PI;
-                        Debug.Log("Angle is " + angle);
+                        orientation_calculator = screenPoint;
+                        orientation_calculator2 = screenPoint2;
+                        orientation_calculator3 = screenPoint3;
                     }
 
                 }
